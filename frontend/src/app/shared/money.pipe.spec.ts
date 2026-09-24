@@ -10,4 +10,12 @@ describe('MoneyPipe', () => {
   it('gibt bei null einen leeren String zurück', () => {
     expect(pipe.transform(null)).toBe('');
   });
+
+  it('gibt bei undefined einen leeren String zurück', () => {
+    expect(pipe.transform(undefined)).toBe('');
+  });
+
+  it('formatiert andere Währungen, z. B. CHF', () => {
+    expect(pipe.transform(99.9, 'CHF').replace(/\s/g, ' ')).toBe('99,90 CHF');
+  });
 });
