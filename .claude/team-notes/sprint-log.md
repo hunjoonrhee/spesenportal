@@ -2,6 +2,12 @@
 
 Thomas가 회의마다 갱신한다. 최신이 위.
 
+## 킥오프 완료 (2026-09-25)
+- Jira EXP: 이슈 80건 CSV 가져오기 확인 (Done 45 / To Do 35). EXP-58·60·61·66 표본 대조 일치.
+- CSV 가져오기 때 다중 라벨이 `_`로 합쳐진 15건(EXP-55~67, 71, 78)을 분리 수정. `labels = sprint-8` → 6건 확인.
+- Confluence 스페이스 SP(Spesenportal)에 Onboarding, Architektur, Team & Arbeitsweise, Konventionen, Architecture Decision Records(ADR-0001~0005) 게시. 원본은 레포 `docs/`.
+- Jira 보드 `EXP board`(id 2)에는 자동 생성된 빈 스프린트 `EXP Sprint 1`만 있음 → Joon이 Sprint 8로 정리. 이슈 담기는 플래닝에서.
+
 ## Sprint 8 (28.09.–11.10.2026) – Joon 합류
 - 상태: 계획됨 (플래닝 월 28.09. 21:00)
 - 목표 초안: Joon이 개발 흐름에 올라타고, "내 경비" 목록이 정확하고 걸러볼 수 있는 데이터를 보여준다.
