@@ -1,0 +1,159 @@
+Issue ID,Issue Type,Summary,Description,Parent,Story Points,Labels,Status
+1,Epic,Spesen erfassen,"Mitarbeitende erfassen Ausgaben, speichern Entwürfe und reichen sie ein.",,,,To Do
+2,Epic,Übersicht & Suche,"Mitarbeitende finden ihre Ausgaben schnell: Liste, Sortierung, Filter, Suche.",,,,To Do
+3,Epic,Genehmigungsworkflow,"Kostenstellenverantwortliche prüfen, genehmigen oder lehnen Einreichungen ab.",,,,To Do
+4,Epic,Auswertung & Dashboard,"Überblick über Ausgaben nach Kategorie, Zeitraum und Kostenstelle.",,,,To Do
+5,Epic,Kostenstellen,Darstellung und Auswertung der Kostenstellenhierarchie.,,,,To Do
+6,Epic,Belege,"Belege hochladen, anzeigen und prüfen.",,,,To Do
+7,Epic,Plattform & Qualität,"Technische Grundlagen: Auth, Persistenz, Fehlerbehandlung, Barrierefreiheit.",,,,To Do
+8,Task,"Projekt-Setup Angular (Standalone, SCSS, Vitest)",Abgeschlossen in Sprint 1.,7,3,sprint-1,Done
+9,Task,Projekt-Setup NestJS mit globalem Präfix /api,Abgeschlossen in Sprint 1.,7,2,sprint-1,Done
+10,Task,"Seed-Daten-Generator für Nutzer, Kostenstellen, Kategorien, Ausgaben",Abgeschlossen in Sprint 1.,7,3,sprint-1,Done
+11,Story,Demo-Authentifizierung per Header X-Demo-User (ADR-0004),Abgeschlossen in Sprint 1.,7,3,sprint-1,Done
+12,Task,Design-Tokens und Grundlayout,Abgeschlossen in Sprint 1.,7,2,sprint-1,Done
+13,Task,Root-Skripte: npm run dev / test / build,Abgeschlossen in Sprint 1.,7,1,sprint-1,Done
+14,Story,API: Kategorien abrufen,Abgeschlossen in Sprint 2.,1,1,sprint-2,Done
+15,Story,API: Kostenstellen als flache Liste abrufen (ADR-0005),Abgeschlossen in Sprint 2.,5,2,sprint-2,Done
+16,Story,Spesenliste: Grundgerüst mit Tabelle,Abgeschlossen in Sprint 2.,2,3,sprint-2,Done
+17,Story,Status-Chip-Komponente,Abgeschlossen in Sprint 2.,2,2,sprint-2,Done
+18,Story,App-Shell mit Navigation und Nutzeranzeige,Abgeschlossen in Sprint 2.,7,3,sprint-2,Done
+19,Task,Swagger/OpenAPI-Doku unter /api/docs (ADR-0002),Abgeschlossen in Sprint 2.,7,2,sprint-2,Done
+20,Story,API: Ausgaben lesen (eigene Ausgaben),Abgeschlossen in Sprint 3.,1,3,sprint-3,Done
+21,Story,API: Paginierung und Sortierung für Ausgaben,Abgeschlossen in Sprint 3.,2,3,sprint-3,Done
+22,Story,Spesenliste: Paginierung im UI,Abgeschlossen in Sprint 3.,2,3,sprint-3,Done
+23,Story,API: Einzelne Ausgabe abrufen inkl. Berechtigungsprüfung,Abgeschlossen in Sprint 3.,1,2,sprint-3,Done
+24,Task,Demo-Login-Screen mit Nutzerauswahl nach Rolle,Abgeschlossen in Sprint 3.,7,3,sprint-3,Done
+25,Bug,Login: Nutzer nach Reload nicht mehr angemeldet,Abgeschlossen in Sprint 3.,7,1,sprint-3,Done
+26,Story,API: Ausgabe anlegen (Entwurf oder direkt einreichen),Abgeschlossen in Sprint 4.,1,3,sprint-4,Done
+27,Story,Währungsumrechnung in EUR (feste Kurse),Abgeschlossen in Sprint 4.,1,2,sprint-4,Done
+28,Story,Erfassungsformular: Grundgerüst,Abgeschlossen in Sprint 4.,1,5,sprint-4,Done
+29,Story,Erfassungsformular: eigene Kostenstelle vorauswählen,Abgeschlossen in Sprint 4.,1,1,sprint-4,Done
+30,Task,e2e-Tests für die API aufsetzen,Abgeschlossen in Sprint 4.,7,3,sprint-4,Done
+31,Bug,Spesenliste: Kategorie wird als ID angezeigt,Abgeschlossen in Sprint 4.,2,1,sprint-4,Done
+32,Story,API: Entwurf bearbeiten (PATCH),Abgeschlossen in Sprint 5.,1,2,sprint-5,Done
+33,Story,API: Entwurf einreichen,Abgeschlossen in Sprint 5.,1,2,sprint-5,Done
+34,Story,Detailansicht einer Ausgabe,Abgeschlossen in Sprint 5.,1,3,sprint-5,Done
+35,Task,MoneyPipe für Beträge im deutschen Format,Abgeschlossen in Sprint 5.,1,1,sprint-5,Done
+36,Story,API: Entwurf löschen,Abgeschlossen in Sprint 5.,1,1,sprint-5,Done
+37,Task,ADR-0001 bis ADR-0003 nachdokumentiert,Abgeschlossen in Sprint 5.,7,1,sprint-5,Done
+38,Story,API: Offene Einreichungen für Kostenstellenverantwortliche,Abgeschlossen in Sprint 6.,3,3,sprint-6,Done
+39,Story,API: Ausgabe genehmigen,Abgeschlossen in Sprint 6.,3,3,sprint-6,Done
+40,Story,"Rollenmodell: Mitarbeiter:in, Kostenstellenverantwortliche:r, Buchhaltung",Abgeschlossen in Sprint 6.,7,2,sprint-6,Done
+41,Story,Nur buchbare Kostenstellen (Blätter) im Formular anbieten,Abgeschlossen in Sprint 6.,1,2,sprint-6,Done
+42,Bug,Spesenliste: Tabelle auf Mobilgeräten nicht scrollbar,Abgeschlossen in Sprint 6.,2,1,sprint-6,Done
+43,Task,Unit-Tests ExpensesService,Abgeschlossen in Sprint 6.,7,2,sprint-6,Done
+44,Task,Umstellung auf Zoneless Change Detection (ADR-0001),Abgeschlossen in Sprint 7.,7,3,sprint-7,Done
+45,Story,Detailansicht: Laden über Resource-API mit Lade- und Fehlerzustand,Abgeschlossen in Sprint 7.,1,2,sprint-7,Done
+46,Task,Upgrade auf Angular 22 und NestJS 12,Abgeschlossen in Sprint 7.,7,3,sprint-7,Done
+47,Task,Onboarding-Dokumentation für neue Teammitglieder,Abgeschlossen in Sprint 7.,7,2,sprint-7,Done
+48,Task,Spike: Ablehnungsprozess mit Fachbereich klären,Abgeschlossen in Sprint 7.,3,2,sprint-7,Done
+49,Story,Beträge in der Liste rechtsbündig mit Tabellenziffern,Abgeschlossen in Sprint 7.,2,1,sprint-7,Done
+50,Task,Stellenübergabe: Wissenstransfer vom bisherigen Junior-Entwickler,Abgeschlossen in Sprint 7.,7,2,sprint-7,Done
+51,Task,ADR-0004 und ADR-0005 nachdokumentiert,Abgeschlossen in Sprint 7.,7,1,sprint-7,Done
+52,Task,Ablehnungsgründe als Vorschlagsliste mit Fachbereich abgestimmt,Abgeschlossen in Sprint 7.,3,1,sprint-7,Done
+53,Story,Spesenliste: Freitextsuche nach Beschreibung,Als Mitarbeiter:in möchte ich meine Ausgaben nach einem Stichwort in der Beschreibung durchsuchen.,2,,frontend,To Do
+54,Story,Spesenliste nach Kategorie filtern,Als Mitarbeiter:in möchte ich meine Ausgaben nach Kategorie filtern.,2,,fullstack,To Do
+55,Story,Genehmigungsübersicht für Kostenstellenverantwortliche,"Als Kostenstellenverantwortliche:r möchte ich alle offenen Einreichungen meiner Kostenstellen sehen, damit ich nichts übersehe.
+
+Akzeptanzkriterien:
+- Neuer Menüpunkt „Zu genehmigen“ nur für die Rolle APPROVER sichtbar
+- Liste zeigt Mitarbeiter:in, Datum, Beschreibung, Betrag in EUR und Kostenstelle
+- Datenquelle: GET /api/approvals/pending
+- Leerer Zustand: „Keine offenen Einreichungen“",3,5,frontend refined,To Do
+56,Story,Ausgabe aus der Genehmigungsübersicht genehmigen,"Als Kostenstellenverantwortliche:r möchte ich eine Einreichung direkt aus der Übersicht genehmigen.
+
+Akzeptanzkriterien:
+- Button „Genehmigen“ pro Zeile ruft POST /api/approvals/{id}/approve auf
+- Nach Erfolg verschwindet die Zeile aus der Liste
+- Fehler werden verständlich angezeigt (kein stilles Scheitern)",3,3,frontend refined,To Do
+57,Story,Entwurf bearbeiten,"Als Mitarbeiter:in möchte ich einen gespeicherten Entwurf bearbeiten, bevor ich ihn einreiche.
+
+Akzeptanzkriterien:
+- In der Detailansicht eines Entwurfs gibt es „Bearbeiten“
+- Das Formular ist mit den Werten des Entwurfs vorbefüllt
+- Speichern ruft PATCH /api/expenses/{id} auf
+- Nur Entwürfe sind bearbeitbar",1,3,frontend refined,To Do
+58,Story,Spesenliste nach Status filtern,"Als Mitarbeiter:in möchte ich meine Ausgaben nach Status filtern, damit ich offene Einreichungen schnell finde.
+
+Akzeptanzkriterien:
+- Status-Chips oberhalb der Liste, Mehrfachauswahl möglich
+- API: GET /api/expenses unterstützt Filter nach einem oder mehreren Status
+- Anzahl und Paginierung beziehen sich auf die gefilterte Menge
+- Kein Treffer: verständlicher leerer Zustand
+- Filter bleibt nach einem Reload erhalten (URL-Query-Parameter)",2,3,fullstack refined sprint-8,To Do
+59,Story,Validierung im Erfassungsformular,"Als Mitarbeiter:in möchte ich sofort sehen, was an meiner Eingabe falsch ist.
+
+Akzeptanzkriterien:
+- Betrag muss größer als 0 sein, maximal zwei Nachkommastellen
+- Datum darf nicht in der Zukunft liegen
+- Fehlermeldung direkt am jeweiligen Feld statt einer Sammelmeldung",1,2,frontend refined,To Do
+60,Story,API: Ausgabe mit Begründung ablehnen,"Als Kostenstellenverantwortliche:r möchte ich eine Einreichung mit Begründung ablehnen können.
+
+Akzeptanzkriterien:
+- POST /api/approvals/{id}/reject mit Body { reason }
+- reason ist Pflicht, 5 bis 300 Zeichen
+- Nur Status SUBMITTED kann abgelehnt werden
+- Swagger-Doku ist aktualisiert",3,3,backend team-be refined sprint-8,To Do
+61,Bug,Spesenliste: Sortierung nach Datum ist falsch,"Nach Klick auf den Spaltenkopf „Datum“ stehen Ausgaben aus verschiedenen Monaten in falscher Reihenfolge (z. B. 02.09. vor 04.07. vor 07.06.).
+
+Akzeptanzkriterien:
+- Reproduktion: als Anna Becker anmelden, auf „Datum“ klicken
+- Erwartet: chronologisch auf- bzw. absteigend
+- Ein Test sichert das Verhalten ab",2,1,frontend refined sprint-8,To Do
+62,Story,Ausgabe im UI ablehnen,"Als Kostenstellenverantwortliche:r möchte ich in der Genehmigungsübersicht ablehnen und eine Begründung angeben.
+
+Akzeptanzkriterien:
+- Abhängig von EXP-60 und EXP-55
+- Begründung über Vorschlagsliste oder Freitext
+- Mitarbeiter:in sieht den Grund in der Detailansicht",3,3,frontend refined,To Do
+63,Story,Spesenliste: Lade- und Leerzustand,"Als Mitarbeiter:in möchte ich erkennen, ob die Liste noch lädt oder wirklich leer ist.
+
+Akzeptanzkriterien:
+- Während des Ladens ist ein Ladezustand sichtbar
+- Ohne Ausgaben: Hinweis mit Link „Ausgabe erfassen“",2,1,frontend refined sprint-8,To Do
+64,Story,Dashboard: Ausgaben pro Kategorie im aktuellen Monat,"Als Mitarbeiter:in möchte ich sehen, wofür ich in diesem Monat wie viel ausgegeben habe.
+
+Akzeptanzkriterien:
+- Neue Seite „Übersicht“ mit Summe je Kategorie in EUR, absteigend sortiert
+- Gesamtsumme des Monats
+- Monat umschaltbar (vorheriger/nächster)
+- Offene Frage: Aggregation im Client oder neuer Endpunkt (siehe EXP-77)?",4,5,frontend refined,To Do
+65,Story,Kostenstellen als Baum anzeigen,"Als Mitarbeiter:in der Buchhaltung möchte ich die Kostenstellenhierarchie als Baum sehen.
+
+Akzeptanzkriterien:
+- Datenquelle: GET /api/cost-centers (flach, mit parentId)
+- Baum beliebig tief, Knoten auf- und zuklappbar
+- Verantwortliche Person je Knoten sichtbar",5,5,frontend refined,To Do
+66,Bug,API: total in der Paginierung zählt alle Ausgaben,"GET /api/expenses liefert als total die Anzahl aller Ausgaben im System statt der eigenen. Anna sieht „152 Ausgaben insgesamt“ und 8 Seiten, ab Seite 3 sind die Seiten leer.
+
+Akzeptanzkriterien:
+- total entspricht der Anzahl der Treffer nach allen Filtern
+- Unit-Test deckt den Fall ab",2,2,backend refined sprint-8,To Do
+67,Story,API: PATCH /expenses mit DTO und Validierung,"Der PATCH-Endpunkt nimmt aktuell beliebige Felder an. Er soll wie POST validieren.
+
+Akzeptanzkriterien:
+- UpdateExpenseDto mit denselben Regeln wie CreateExpenseDto, alle Felder optional
+- Unbekannte Felder werden verworfen
+- Tests für gültige und ungültige Änderungen",7,2,backend team-be refined sprint-8,To Do
+68,Story,Beleg hochladen per Drag & Drop,"Als Mitarbeiter:in möchte ich zu einer Ausgabe einen Beleg (PDF, JPG, PNG, max. 5 MB) hochladen. Zu groß für einen Sprint, bitte im Refinement schneiden.",6,8,fullstack,To Do
+69,Story,CSV-Export für die Buchhaltung,Als Buchhaltung möchte ich genehmigte Ausgaben eines Monats als CSV exportieren.,4,,fullstack,To Do
+70,Story,Monatsvergleich als Balkendiagramm (ohne Chart-Bibliothek),Als Mitarbeiter:in möchte ich meine Ausgaben der letzten sechs Monate vergleichen.,4,,frontend,To Do
+71,Story,Einheitliche Fehlerbehandlung im Frontend,"HTTP-Fehler verschwinden aktuell stillschweigend. Nutzer:innen sollen verständliche Hinweise bekommen.
+
+Akzeptanzkriterien:
+- Zentrale Behandlung von HTTP-Fehlern (401, 403, 404, 400, 5xx)
+- Validierungsfehler der API werden am Formular angezeigt
+- Kein Button bleibt nach einem Fehler dauerhaft deaktiviert",7,3,frontend refined,To Do
+72,Story,Kostenstellen-Summen inklusive Unterkostenstellen,Als Kostenstellenverantwortliche:r möchte ich die Summe meiner Kostenstelle inklusive aller Unterkostenstellen sehen.,5,5,fullstack,To Do
+73,Story,Persistenz: Datenbank statt In-Memory,"Änderungen gehen beim Neustart verloren (ADR-0003). Welche Datenbank, welches Mapping, welche Migrationen? ADR erforderlich.",7,8,backend,To Do
+74,Story,Filter- und Sortierzustand in der URL (Deep Links),Als Mitarbeiter:in möchte ich einen Link auf meine gefilterte Liste speichern können.,2,3,frontend,To Do
+75,Task,Spike: SSO-Anbindung (Entra ID),Ablösung der Demo-Authentifizierung (ADR-0004) vorbereiten.,7,,fullstack,To Do
+76,Story,Ausgaben zu einer Reise gruppieren,Als Mitarbeiter:in möchte ich mehrere Ausgaben einer Dienstreise zusammenfassen und gemeinsam einreichen.,1,8,fullstack,To Do
+77,Story,API: Aggregations-Endpunkt nach Kategorie,Alternative zu clientseitiger Aggregation für EXP-64. Im Refinement abwägen.,4,3,backend,To Do
+78,Bug,Detailansicht zeigt Datum im ISO-Format,"Die Liste zeigt 02.09.2026, die Detailansicht 2026-09-02. Einheitlich deutsches Format.
+
+Akzeptanzkriterien:
+- Datum überall im Format TT.MM.JJJJ
+- Eine zentrale Lösung statt Formatierung pro Komponente",1,1,frontend refined,To Do
+79,Story,Hinweis bei Genehmigung oder Ablehnung,"Als Mitarbeiter:in möchte ich sehen, welche meiner Einreichungen sich seit meinem letzten Besuch geändert haben.",3,,frontend,To Do
+80,Story,Barrierefreiheit von Tabelle und Formular,"Tastaturbedienung, Fokusreihenfolge, Labels und Screenreader-Texte prüfen und verbessern.",7,3,frontend,To Do

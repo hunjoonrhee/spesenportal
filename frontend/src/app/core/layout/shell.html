@@ -1,0 +1,20 @@
+<header class="bar">
+  <a class="brand" routerLink="/expenses">
+    <span class="mark" aria-hidden="true"></span>
+    <span>Nordwerk Spesen</span>
+  </a>
+  <nav class="nav" aria-label="Hauptnavigation">
+    <a routerLink="/expenses" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Meine Ausgaben</a>
+    <a routerLink="/expenses/new" routerLinkActive="active">Ausgabe erfassen</a>
+  </nav>
+  @if (user(); as u) {
+    <div class="who">
+      <span class="name">{{ u.name }}</span>
+      <span class="role">{{ roleLabel() }}</span>
+      <button type="button" class="link" (click)="switchUser()">Nutzer wechseln</button>
+    </div>
+  }
+</header>
+<main class="page">
+  <router-outlet />
+</main>

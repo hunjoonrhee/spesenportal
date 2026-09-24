@@ -1,0 +1,58 @@
+<a class="back" routerLink="/expenses">Zurück zu meinen Ausgaben</a>
+<h1>Ausgabe erfassen</h1>
+
+<form [formGroup]="form" (ngSubmit)="save(true)" novalidate>
+  <div class="row">
+    <label>
+      <span>Datum</span>
+      <input type="date" formControlName="date" />
+    </label>
+    <label>
+      <span>Kategorie</span>
+      <select formControlName="categoryId">
+        <option value="" disabled>Bitte wählen</option>
+        @for (cat of categories(); track cat.id) {
+          <option [value]="cat.id">{{ cat.label }}</option>
+        }
+      </select>
+    </label>
+  </div>
+
+  <div class="row">
+    <label>
+      <span>Betrag</span>
+      <input type="text" inputmode="decimal" formControlName="amount" placeholder="0,00" />
+    </label>
+    <label class="narrow">
+      <span>Währung</span>
+      <select formControlName="currency">
+        <option value="EUR">EUR</option>
+        <option value="CHF">CHF</option>
+        <option value="USD">USD</option>
+      </select>
+    </label>
+    <label>
+      <span>Kostenstelle</span>
+      <select formControlName="costCenterId">
+        <option value="" disabled>Bitte wählen</option>
+        @for (cc of costCenters(); track cc.id) {
+          <option [value]="cc.id">{{ cc.code }} {{ cc.name }}</option>
+        }
+      </select>
+    </label>
+  </div>
+
+  <label>
+    <span>Beschreibung</span>
+    <input type="text" formControlName="description" placeholder="z. B. Kundentermin Hamburg – Bahnfahrt" />
+  </label>
+
+  @if (form.invalid && form.touched) {
+    <p class="error">Bitte fülle alle Felder aus.</p>
+  }
+
+  <div class="actions">
+    <button type="submit" class="btn primary" [disabled]="saving()">Einreichen</button>
+    <button type="button" class="btn" [disabled]="saving()" (click)="save(false)">Als Entwurf speichern</button>
+  </div>
+</form>

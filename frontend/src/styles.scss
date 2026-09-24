@@ -1,0 +1,54 @@
+/* Nordwerk Spesen – Design-Tokens (siehe docs/architecture.md) */
+:root {
+  --nw-ink: #1d2b36;
+  --nw-steel: #5b6b77;
+  --nw-paper: #f3f5f4;
+  --nw-surface: #ffffff;
+  --nw-line: #d9dfe0;
+  --nw-signal: #0b6e6a;
+
+  --nw-status-draft: #6f7d87;
+  --nw-status-submitted: #2f5fb3;
+  --nw-status-approved: #2e7d4f;
+  --nw-status-rejected: #b3261e;
+  --nw-status-paid: #5c4a9e;
+
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; }
+
+body {
+  background: var(--nw-paper);
+  color: var(--nw-ink);
+  font-family: 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+h1, h2 { letter-spacing: -0.015em; line-height: 1.2; }
+
+a { color: var(--nw-signal); }
+
+:focus-visible { outline: 2px solid var(--nw-signal); outline-offset: 2px; }
+
+.btn {
+  display: inline-block;
+  padding: 0.55rem 1rem;
+  border: 1px solid var(--nw-ink);
+  border-radius: 3px;
+  background: var(--nw-surface);
+  color: var(--nw-ink);
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  &.primary { background: var(--nw-signal); border-color: var(--nw-signal); color: #fff; }
+  &:disabled { opacity: 0.55; cursor: default; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}

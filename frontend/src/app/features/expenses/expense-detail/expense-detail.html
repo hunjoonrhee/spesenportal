@@ -1,0 +1,31 @@
+<a class="back" routerLink="/expenses">Zurück zu meinen Ausgaben</a>
+
+@if (expense.isLoading()) {
+  <p class="muted">Lädt …</p>
+} @else if (expense.error()) {
+  <p class="error">Diese Ausgabe konnte nicht geladen werden.</p>
+} @else if (expense.value(); as e) {
+  <div class="head">
+    <h1>{{ e.description }}</h1>
+    <app-status-chip [status]="e.status" />
+  </div>
+  <p class="amount">{{ e.amount | money: e.currency }}</p>
+  @if (e.currency !== 'EUR') {
+    <p class="muted">entspricht {{ e.amountEur | money }}</p>
+  }
+
+  <dl>
+    <dt>Datum</dt>
+    <dd>{{ e.date }}</dd>
+    <dt>Kategorie</dt>
+    <dd>{{ categoryLabel() }}</dd>
+    <dt>Kostenstelle</dt>
+    <dd>{{ costCenterLabel() }}</dd>
+    <dt>Beleg</dt>
+    <dd>{{ e.receiptFileName ?? 'Kein Beleg hochgeladen' }}</dd>
+    @if (e.rejectionReason) {
+      <dt>Ablehnungsgrund</dt>
+      <dd>{{ e.rejectionReason }}</dd>
+    }
+  </dl>
+}

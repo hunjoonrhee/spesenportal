@@ -1,0 +1,10 @@
+.back { color: var(--nw-steel); font-size: 0.875rem; }
+h1 { font-size: 1.75rem; margin: 0.5rem 0 1.5rem; }
+form { max-width: 720px; display: grid; gap: 1rem; }
+.row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; }
+label { display: grid; gap: 0.3rem; }
+label span { font-size: 0.8125rem; font-weight: 600; color: var(--nw-steel); }
+input, select { font: inherit; padding: 0.55rem 0.65rem; border: 1px solid #b9c3c7; border-radius: 3px; background: var(--nw-surface); }
+input:focus, select:focus { outline: 2px solid var(--nw-signal); outline-offset: 1px; }
+.error { color: var(--nw-status-rejected); margin: 0; }
+.actions { display: flex; gap: 0.75rem; margin-top: 0.5rem; }

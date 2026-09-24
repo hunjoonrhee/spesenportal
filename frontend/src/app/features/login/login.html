@@ -1,0 +1,19 @@
+<section class="login">
+  <h1>Als Demo-Nutzer anmelden</h1>
+  <p class="hint">Solange SSO noch nicht angebunden ist, wählst du hier, als wer du arbeitest.</p>
+  @for (group of groups(); track group.role) {
+    <h2>{{ group.label }}</h2>
+    <ul>
+      @for (user of group.users; track user.id) {
+        <li>
+          <button type="button" (click)="choose(user)">
+            <span class="name">{{ user.name }}</span>
+            <span class="mail">{{ user.email }}</span>
+          </button>
+        </li>
+      } @empty {
+        <li class="hint">Backend nicht erreichbar? Läuft <code>npm run dev</code>?</li>
+      }
+    </ul>
+  }
+</section>

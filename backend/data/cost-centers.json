@@ -1,0 +1,72 @@
+[
+  {
+    "id": "cc-1000",
+    "code": "1000",
+    "name": "Geschäftsführung",
+    "parentId": null,
+    "responsibleUserId": null
+  },
+  {
+    "id": "cc-1100",
+    "code": "1100",
+    "name": "Vertrieb",
+    "parentId": "cc-1000",
+    "responsibleUserId": "u-06"
+  },
+  {
+    "id": "cc-1110",
+    "code": "1110",
+    "name": "Vertrieb Nord",
+    "parentId": "cc-1100",
+    "responsibleUserId": "u-06"
+  },
+  {
+    "id": "cc-1120",
+    "code": "1120",
+    "name": "Vertrieb Süd",
+    "parentId": "cc-1100",
+    "responsibleUserId": "u-06"
+  },
+  {
+    "id": "cc-1200",
+    "code": "1200",
+    "name": "IT",
+    "parentId": "cc-1000",
+    "responsibleUserId": "u-07"
+  },
+  {
+    "id": "cc-1210",
+    "code": "1210",
+    "name": "Softwareentwicklung",
+    "parentId": "cc-1200",
+    "responsibleUserId": "u-07"
+  },
+  {
+    "id": "cc-1220",
+    "code": "1220",
+    "name": "IT-Betrieb",
+    "parentId": "cc-1200",
+    "responsibleUserId": "u-07"
+  },
+  {
+    "id": "cc-1300",
+    "code": "1300",
+    "name": "Verwaltung",
+    "parentId": "cc-1000",
+    "responsibleUserId": "u-08"
+  },
+  {
+    "id": "cc-1310",
+    "code": "1310",
+    "name": "Buchhaltung",
+    "parentId": "cc-1300",
+    "responsibleUserId": "u-08"
+  },
+  {
+    "id": "cc-1320",
+    "code": "1320",
+    "name": "Personal",
+    "parentId": "cc-1300",
+    "responsibleUserId": "u-08"
+  }
+]

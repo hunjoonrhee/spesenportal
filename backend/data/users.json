@@ -1,0 +1,58 @@
+[
+  {
+    "id": "u-01",
+    "name": "Anna Becker",
+    "email": "anna.becker@nordwerk.example",
+    "role": "EMPLOYEE",
+    "costCenterId": "cc-1110"
+  },
+  {
+    "id": "u-02",
+    "name": "Lukas Wagner",
+    "email": "lukas.wagner@nordwerk.example",
+    "role": "EMPLOYEE",
+    "costCenterId": "cc-1210"
+  },
+  {
+    "id": "u-03",
+    "name": "Mehmet Yilmaz",
+    "email": "mehmet.yilmaz@nordwerk.example",
+    "role": "EMPLOYEE",
+    "costCenterId": "cc-1120"
+  },
+  {
+    "id": "u-04",
+    "name": "Julia Schröder",
+    "email": "julia.schroeder@nordwerk.example",
+    "role": "EMPLOYEE",
+    "costCenterId": "cc-1220"
+  },
+  {
+    "id": "u-05",
+    "name": "Felix Hoffmann",
+    "email": "felix.hoffmann@nordwerk.example",
+    "role": "EMPLOYEE",
+    "costCenterId": "cc-1320"
+  },
+  {
+    "id": "u-06",
+    "name": "Claudia Richter",
+    "email": "claudia.richter@nordwerk.example",
+    "role": "APPROVER",
+    "costCenterId": "cc-1100"
+  },
+  {
+    "id": "u-07",
+    "name": "Stefan Krüger",
+    "email": "stefan.krueger@nordwerk.example",
+    "role": "APPROVER",
+    "costCenterId": "cc-1200"
+  },
+  {
+    "id": "u-08",
+    "name": "Petra Neumann",
+    "email": "petra.neumann@nordwerk.example",
+    "role": "ACCOUNTING",
+    "costCenterId": "cc-1310"
+  }
+]

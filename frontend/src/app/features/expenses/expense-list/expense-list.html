@@ -1,0 +1,41 @@
+<div class="head">
+  <h1>Meine Ausgaben</h1>
+  <a class="btn primary" routerLink="/expenses/new">Ausgabe erfassen</a>
+</div>
+
+@if (total$ | async; as total) {
+  <p class="count">{{ total }} Ausgaben insgesamt</p>
+}
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th scope="col"><button type="button" class="sort" (click)="sortByDate()">Datum</button></th>
+        <th scope="col">Beschreibung</th>
+        <th scope="col">Kategorie</th>
+        <th scope="col" class="num">Betrag</th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (row of rows$ | async; track row.id) {
+        <tr>
+          <td class="date">{{ row.formattedDate }}</td>
+          <td><a [routerLink]="['/expenses', row.id]">{{ row.description }}</a></td>
+          <td>{{ row.categoryLabel }}</td>
+          <td class="num">{{ formatAmount(row.amount, row.currency) }}</td>
+          <td><app-status-chip [status]="row.status" /></td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
+
+@if (total$ | async; as total) {
+  <nav class="pager" aria-label="Seiten">
+    @for (p of pages(total); track p) {
+      <button type="button" [class.current]="p === page" (click)="goTo(p)">{{ p }}</button>
+    }
+  </nav>
+}

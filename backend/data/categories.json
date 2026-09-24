@@ -1,0 +1,62 @@
+[
+  {
+    "id": "cat-01",
+    "key": "HOTEL",
+    "label": "Übernachtung"
+  },
+  {
+    "id": "cat-02",
+    "key": "TRAIN",
+    "label": "Bahnfahrt"
+  },
+  {
+    "id": "cat-03",
+    "key": "FLIGHT",
+    "label": "Flug"
+  },
+  {
+    "id": "cat-04",
+    "key": "TAXI",
+    "label": "Taxi"
+  },
+  {
+    "id": "cat-05",
+    "key": "RENTAL_CAR",
+    "label": "Mietwagen"
+  },
+  {
+    "id": "cat-06",
+    "key": "FUEL",
+    "label": "Kraftstoff"
+  },
+  {
+    "id": "cat-07",
+    "key": "PARKING",
+    "label": "Parken"
+  },
+  {
+    "id": "cat-08",
+    "key": "HOSPITALITY",
+    "label": "Bewirtung"
+  },
+  {
+    "id": "cat-09",
+    "key": "PER_DIEM",
+    "label": "Verpflegungsmehraufwand"
+  },
+  {
+    "id": "cat-10",
+    "key": "OFFICE",
+    "label": "Büromaterial"
+  },
+  {
+    "id": "cat-11",
+    "key": "SOFTWARE",
+    "label": "Software & Abos"
+  },
+  {
+    "id": "cat-12",
+    "key": "OTHER",
+    "label": "Sonstiges"
+  }
+]

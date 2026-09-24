@@ -1,0 +1,112 @@
+# Joon의 PR을 자동 리뷰한다: frontend/ 변경 → Sabine, backend/ 변경 → Markus.
+# BE 팀 PR(제목이 "[BE]"로 시작)은 자동 리뷰하지 않는다. Joon이 교차 리뷰한다.
+name: Team Review
+
+on:
+  pull_request:
+    types: [opened, synchronize, ready_for_review]
+
+jobs:
+  changes:
+    if: github.event.pull_request.draft == false && !startsWith(github.event.pull_request.title, '[BE]')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+    outputs:
+      frontend: ${{ steps.filter.outputs.frontend }}
+      backend: ${{ steps.filter.outputs.backend }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: filter
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            frontend:
+              - 'frontend/**'
+            backend:
+              - 'backend/**'
+
+  sabine:
+    needs: changes
+    if: needs.changes.outputs.frontend == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: write
+      id-token: write
+    env:
+      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      SLACK_CHANNEL_PR_REVIEW: ${{ vars.SLACK_CHANNEL_PR_REVIEW }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: |
+            REPO: ${{ github.repository }}
+            PR NUMBER: ${{ github.event.pull_request.number }}
+
+            너는 FE Lead Sabine Keller다. CLAUDE.md와 .claude/agents/sabine-fe-lead.md를 먼저 읽고 그 성격과 리뷰 방식을 그대로 따른다.
+            이 PR에서 frontend/ 아래 변경만 리뷰한다. .claude/team-notes/tech-debt.md를 참고하되 내용을 직접 누설하지 말고 질문으로 유도한다.
+            - 구체적인 줄에는 인라인 코멘트를 남긴다 (mcp__github_inline_comment__create_inline_comment).
+            - 마지막에 요약 코멘트 하나를 gh pr comment로 남긴다: 꼭 고칠 것 / 고려해볼 것 / 잘한 것.
+            - 코멘트는 한국어, 문제 → 이유 → 대안 순서. 정답 코드를 통째로 주지 않는다 (5줄 이내 예시만).
+          claude_args: |
+            --model opus
+            --max-turns 20
+            --allowedTools "mcp__github_inline_comment__create_inline_comment,Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*),Read,Grep,Glob"
+      - name: Slack-Hinweis
+        if: env.SLACK_BOT_TOKEN != '' && env.SLACK_CHANNEL_PR_REVIEW != ''
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+        run: >
+          node scripts/slack-post.mjs --as sabine --channel "$SLACK_CHANNEL_PR_REVIEW"
+          --text "PR #$PR_NUMBER ($PR_TITLE) 리뷰 달았어. $PR_URL"
+
+  markus:
+    needs: changes
+    if: needs.changes.outputs.backend == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: write
+      id-token: write
+    env:
+      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      SLACK_CHANNEL_PR_REVIEW: ${{ vars.SLACK_CHANNEL_PR_REVIEW }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: |
+            REPO: ${{ github.repository }}
+            PR NUMBER: ${{ github.event.pull_request.number }}
+
+            너는 BE Lead Markus Weber다. CLAUDE.md와 .claude/agents/markus-be-lead.md를 먼저 읽고 그 체크리스트대로 리뷰한다.
+            이 PR에서 backend/ 아래 변경만 리뷰한다. .claude/team-notes/tech-debt.md를 참고하되 내용을 직접 누설하지 말고 질문으로 유도한다.
+            - 구체적인 줄에는 인라인 코멘트를 남긴다 (mcp__github_inline_comment__create_inline_comment).
+            - 마지막에 요약 코멘트 하나를 gh pr comment로 남긴다: 꼭 고칠 것 / 고려해볼 것 / 잘한 것.
+            - 코멘트는 한국어, 문제 → 이유 → 대안 순서. 정답 코드를 통째로 주지 않는다 (5줄 이내 예시만).
+          claude_args: |
+            --model opus
+            --max-turns 20
+            --allowedTools "mcp__github_inline_comment__create_inline_comment,Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*),Read,Grep,Glob"
+      - name: Slack-Hinweis
+        if: env.SLACK_BOT_TOKEN != '' && env.SLACK_CHANNEL_PR_REVIEW != ''
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+        run: >
+          node scripts/slack-post.mjs --as markus --channel "$SLACK_CHANNEL_PR_REVIEW"
+          --text "PR #$PR_NUMBER ($PR_TITLE) BE 쪽 리뷰 남겼어. $PR_URL"

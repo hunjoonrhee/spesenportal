@@ -1,0 +1,15 @@
+.head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
+h1 { margin: 0; font-size: 1.75rem; }
+.count { color: var(--nw-steel); margin: 0.25rem 0 1.25rem; }
+.table-wrap { overflow-x: auto; background: var(--nw-surface); border: 1px solid var(--nw-line); }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 0.65rem 0.9rem; text-align: left; border-bottom: 1px solid var(--nw-line); }
+th { font-size: 0.8125rem; color: var(--nw-steel); font-weight: 600; background: var(--nw-paper); }
+tbody tr:hover { background: #f9fbfb; }
+.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.date { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.sort { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline dotted; }
+td a { color: var(--nw-ink); }
+.pager { display: flex; gap: 0.25rem; margin-top: 1rem; flex-wrap: wrap; }
+.pager button { min-width: 2.25rem; padding: 0.3rem 0.5rem; border: 1px solid var(--nw-line); background: var(--nw-surface); cursor: pointer; font: inherit; }
+.pager .current { background: var(--nw-ink); color: #fff; border-color: var(--nw-ink); }
