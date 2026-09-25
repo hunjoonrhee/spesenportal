@@ -6,13 +6,18 @@
 //   - GitHub Actions: Umgebungsvariable SLACK_BOT_TOKEN (Repository-Secret)
 //   - Claude-Routinen: Token als "API-Anmeldedaten" im Cloud-Environment hinterlegt,
 //     dazu SLACK_AUTH_VIA_PROXY=1 setzen. Der Proxy hängt den Token an die Anfrage an,
-//     die Session sieht ihn nie.
+//     die Session sieht ihn nie. In diesem Modus wird curl verwendet, weil nur curl
+//     über den Proxy der Umgebung läuft (Nodes fetch umgeht ihn).
 //
 // Aufruf:
 //   node scripts/slack-post.mjs --as thomas --channel C0123456789 --text "Hallo"
 //   echo "längerer Text" | node scripts/slack-post.mjs --as lena --channel C0123456789
 //   Optional: --thread <ts>   (Antwort in einem Thread)
 //             --mention-joon  (stellt <@SLACK_JOON_USER_ID> voran, damit Joon eine Push-Benachrichtigung bekommt)
+
+import { execFileSync } from 'node:child_process';
+
+const API_URL = process.env.SLACK_API_URL ?? 'https://slack.com/api/chat.postMessage';
 
 const PERSONAS = {
   thomas: { username: 'Thomas Brandt (PL)', icon_emoji: ':spiral_note_pad:' },
@@ -54,15 +59,23 @@ if (!PERSONAS[who] || !channel || !text) {
   process.exit(1);
 }
 
-const res = await fetch('https://slack.com/api/chat.postMessage', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json; charset=utf-8',
-    ...(token ? { Authorization: `Bearer ${token}` } : {}),
-  },
-  body: JSON.stringify({ channel, text, thread_ts: thread, ...PERSONAS[who] }),
-});
-const data = await res.json();
+const payload = JSON.stringify({ channel, text, thread_ts: thread, ...PERSONAS[who] });
+let data;
+if (token) {
+  const res = await fetch(API_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json; charset=utf-8', Authorization: `Bearer ${token}` },
+    body: payload,
+  });
+  data = await res.json();
+} else {
+  const out = execFileSync(
+    'curl',
+    ['-sS', '-X', 'POST', API_URL, '-H', 'Content-Type: application/json; charset=utf-8', '--data-binary', '@-'],
+    { input: payload },
+  );
+  data = JSON.parse(out.toString('utf-8'));
+}
 if (!data.ok) {
   console.error('Slack-Fehler:', data.error);
   process.exit(1);
