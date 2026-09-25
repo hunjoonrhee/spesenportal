@@ -2,6 +2,12 @@
 // Postet als bestimmtes Teammitglied in Slack (eigener Name und eigenes Icon).
 // Benötigt einen Bot-Token mit den Scopes chat:write und chat:write.customize.
 //
+// Token-Quellen:
+//   - GitHub Actions: Umgebungsvariable SLACK_BOT_TOKEN (Repository-Secret)
+//   - Claude-Routinen: Token als "API-Anmeldedaten" im Cloud-Environment hinterlegt,
+//     dazu SLACK_AUTH_VIA_PROXY=1 setzen. Der Proxy hängt den Token an die Anfrage an,
+//     die Session sieht ihn nie.
+//
 // Aufruf:
 //   node scripts/slack-post.mjs --as thomas --channel C0123456789 --text "Hallo"
 //   echo "längerer Text" | node scripts/slack-post.mjs --as lena --channel C0123456789
@@ -38,8 +44,9 @@ const body = arg('text') ?? (await readStdin());
 const joon = process.env.SLACK_JOON_USER_ID;
 const text = process.argv.includes('--mention-joon') && joon && body ? `<@${joon}> ${body}` : body;
 
-if (!token) {
-  console.log('SLACK_BOT_TOKEN fehlt – nichts gesendet.');
+const viaProxy = process.env.SLACK_AUTH_VIA_PROXY === '1';
+if (!token && !viaProxy) {
+  console.log('SLACK_BOT_TOKEN fehlt (und SLACK_AUTH_VIA_PROXY ist nicht gesetzt) – nichts gesendet.');
   process.exit(0);
 }
 if (!PERSONAS[who] || !channel || !text) {
@@ -49,7 +56,10 @@ if (!PERSONAS[who] || !channel || !text) {
 
 const res = await fetch('https://slack.com/api/chat.postMessage', {
   method: 'POST',
-  headers: { 'Content-Type': 'application/json; charset=utf-8', Authorization: `Bearer ${token}` },
+  headers: {
+    'Content-Type': 'application/json; charset=utf-8',
+    ...(token ? { Authorization: `Bearer ${token}` } : {}),
+  },
   body: JSON.stringify({ channel, text, thread_ts: thread, ...PERSONAS[who] }),
 });
 const data = await res.json();
