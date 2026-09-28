@@ -40,7 +40,11 @@ export class ExpenseList implements OnInit {
     this.expenseService.list({ page: this.page, pageSize: this.pageSize }).subscribe((result) => {
       const rows = result.items.map((e) => ({
         ...e,
-        formattedDate: new Date(e.date).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' }),
+        formattedDate: new Date(e.date).toLocaleDateString('de-DE', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric',
+        }),
         categoryLabel: this.categories.find((c) => c.id === e.categoryId)?.label ?? '–',
       }));
       this.rows$.next(rows);
@@ -51,7 +55,9 @@ export class ExpenseList implements OnInit {
   sortByDate(): void {
     this.sortAsc = !this.sortAsc;
     const sorted = [...this.rows$.value].sort((a, b) =>
-      this.sortAsc ? a.formattedDate.localeCompare(b.formattedDate) : b.formattedDate.localeCompare(a.formattedDate),
+      this.sortAsc
+        ? new Date(a.date).getTime() - new Date(b.date).getTime()
+        : new Date(b.date).getTime() - new Date(a.date).getTime(),
     );
     this.rows$.next(sorted);
   }
