@@ -5,7 +5,7 @@ import { ExpenseList, ExpenseRow } from './expense-list';
 const mockExpenses: ExpenseRow[] = [
   {
     id: '1',
-    date: '2023-01-01',
+    date: '2023-09-02',
     employeeId: 'e1',
     categoryId: 'cat1',
     amount: 100,
@@ -24,7 +24,7 @@ const mockExpenses: ExpenseRow[] = [
   },
   {
     id: '2',
-    date: '2023-02-01',
+    date: '2023-07-04',
     employeeId: 'e2',
     categoryId: 'cat2',
     amount: 200,
@@ -48,7 +48,7 @@ describe('ExpenseList', () => {
     TestBed.configureTestingModule({ providers: [provideRouter([])] });
   });
 
-  it('sortiert die Ausgaben nach Datum absteigend, wenn sortAsc auf false gesetzt ist', () => {
+  it('sortiert die Ausgaben nach Datum aufsteigend, wenn sortAsc vorher auf false gesetzt ist', () => {
     const fixture = TestBed.createComponent(ExpenseList);
     const component = fixture.componentInstance;
     component.rows$.next(mockExpenses);
@@ -56,7 +56,7 @@ describe('ExpenseList', () => {
     component.sortByDate();
     expect(component.rows$.value[0].id).toBe('2');
   });
-  it('sortiert die Ausgaben nach Datum aufsteigend, wenn sortAsc auf true gesetzt ist', () => {
+  it('sortiert die Ausgaben nach Datum absteigend, wenn sortAsc vorher auf true gesetzt ist', () => {
     const fixture = TestBed.createComponent(ExpenseList);
     const component = fixture.componentInstance;
     component.rows$.next(mockExpenses);
