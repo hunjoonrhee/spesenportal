@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { of } from 'rxjs';
-import { mock } from 'vitest-mock-extended';
 import { ExpenseService } from '../../../core/api/expense.service';
 import { MasterDataService } from '../../../core/api/master-data.service';
 import { Expense } from '../../../core/models';
@@ -98,7 +97,6 @@ const mockPage = 1;
 const mockPageSize = 2;
 
 const expenseServiceMock = {
-  ...mock<ExpenseService>(),
   list: vi.fn().mockReturnValue(
     of({
       items: mockExpenses.slice((mockPage - 1) * mockPageSize, mockPage * mockPageSize),

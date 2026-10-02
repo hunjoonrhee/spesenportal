@@ -7,7 +7,7 @@ import { MasterDataService } from '../../../core/api/master-data.service';
 import { Category, Expense } from '../../../core/models';
 import { StatusChip } from '../../../shared/status-chip/status-chip';
 
-export interface ExpenseRow extends Expense {
+interface ExpenseRow extends Expense {
   formattedDate: string;
   categoryLabel: string;
 }
