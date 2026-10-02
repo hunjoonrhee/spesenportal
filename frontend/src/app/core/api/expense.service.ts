@@ -7,7 +7,9 @@ import { Expense, Page } from '../models';
 export class ExpenseService {
   private readonly http = inject(HttpClient);
 
-  list(params: { page?: number; pageSize?: number; sort?: string; order?: string } = {}): Observable<Page<Expense>> {
+  list(
+    params: { page?: number; pageSize?: number; sort?: string; order?: string } = {},
+  ): Observable<Page<Expense>> {
     let httpParams = new HttpParams();
     Object.entries(params).forEach(([key, value]) => {
       if (value !== undefined) httpParams = httpParams.set(key, String(value));
