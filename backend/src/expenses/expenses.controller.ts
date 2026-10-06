@@ -1,8 +1,9 @@
 import { Body, Controller, Delete, Get, HttpCode, Param, Patch, Post, Query } from '@nestjs/common';
-import { ApiHeader, ApiTags } from '@nestjs/swagger';
+import { ApiBadRequestResponse, ApiHeader, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CurrentUser } from '../common/current-user.decorator.js';
 import type { Expense, Page, User } from '../domain/types.js';
 import { CreateExpenseDto } from './dto/create-expense.dto.js';
+import { UpdateExpenseDto } from './dto/update-expense.dto.js';
 import { ListExpensesQuery } from './dto/list-expenses.query.js';
 import { ExpensesService } from './expenses.service.js';
 
@@ -28,8 +29,11 @@ export class ExpensesController {
   }
 
   @Patch(':id')
-  update(@CurrentUser() user: User, @Param('id') id: string, @Body() body: any): Expense {
-    return this.expenses.update(user, id, body);
+  @ApiOperation({ summary: 'Entwurf ändern (alle Felder optional, unbekannte Felder werden verworfen)' })
+  @ApiOkResponse({ description: 'Aktualisierte Ausgabe' })
+  @ApiBadRequestResponse({ description: 'Ungültige Werte, unbekannte Kategorie/Kostenstelle oder Status ≠ DRAFT' })
+  update(@CurrentUser() user: User, @Param('id') id: string, @Body() dto: UpdateExpenseDto): Expense {
+    return this.expenses.update(user, id, dto);
   }
 
   @Post(':id/submit')
