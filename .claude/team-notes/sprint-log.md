@@ -8,9 +8,11 @@ Thomas가 회의마다 갱신한다. 최신이 위.
 - Confluence 스페이스 SP(Spesenportal)에 Onboarding, Architektur, Team & Arbeitsweise, Konventionen, Architecture Decision Records(ADR-0001~0005) 게시. 원본은 레포 `docs/`.
 - Jira 보드 `EXP board`(id 2)에는 자동 생성된 빈 스프린트 `EXP Sprint 1`만 있음 → Joon이 Sprint 8로 정리. 이슈 담기는 플래닝에서.
 
-## Sprint 8 (28.09.–11.10.2026) – Joon 합류
+## Sprint 8 (28.09.–18.10.2026, 1주 연장) – Joon 합류
 - 상태: **진행 중** (플래닝 월 28.09., Jira 스프린트 시작함)
+- 연장: 원래 종료일은 11.10.이었다. Joon이 출장(05.10. 주)으로 작업하지 못해 07.10.에 #daily에서 "종료를 일주일 미루자"고 제안했고, 10.10.에 종료일을 18.10.로 확정했다. Jira 종료일은 12.10.에 18.10. 23:59로 반영했다. 리뷰·회고는 토 17.10., Sprint 9 플래닝은 월 19.10.로 옮긴다.
 - 목표: „Joon ist im Team angekommen, und ‚Meine Ausgaben' zeigt korrekte und filterbare Daten."
+- 진행 (12.10.): EXP-61 PR #6 머지. Sabine이 재리뷰에서 승인했다(남은 🔴 0개). 요청 경쟁 상태(race condition)는 후속으로 넘겼고, 목록·폼·상세 화면의 상태 관리 비교는 14.10. 리파인먼트 안건이다. EXP-66과 EXP-58은 아직 시작 전이고, BE PR #8(EXP-60)과 #9(EXP-67)는 Joon의 교차 리뷰를 기다린다.
 - 캐파 (Joon): 12 h − 이벤트 3 h − 온보딩 2 h = 티켓 약 7 h. 바쁜 주 없음.
 - Joon: EXP-61 (FE, 1) → EXP-66 (BE, 2) → EXP-58 (Fullstack, 3) = 6 SP, 예상 6~9 h. Stretch: EXP-63 (FE, 1, 스프린트에는 안 담음)
 - FE:BE = 50:50 (목표 70:30). EXP-66이 EXP-58의 선행 작업이라 이번에는 받아들임. Sprint 9에서 FE 비중을 높여 균형을 맞춘다.
@@ -20,6 +22,8 @@ Thomas가 회의마다 갱신한다. 최신이 위.
   - EXP-66, EXP-58, EXP-67이 모두 `expenses.controller.ts`와 `expenses.service.ts`를 건드린다. 머지 충돌 가능.
   - 예상 시간이 캐파 상한(9 h 대 7 h)에 걸린다. 넘치면 EXP-58의 FE 마무리가 Sprint 9로 넘어갈 수 있다.
   - EXP-60 AC 추가안(권한은 Kostenstelle 책임자, 결정 필드 저장, trim)을 Jira 코멘트로 남김. **Lena 확인 대기.**
+  - EXP-61 SP: 01.10.에 Joon의 요청으로 Jira에서 1 → 5로 바뀌었지만 리파인먼트나 Lena 확인을 거치지 않았다. 리뷰·회고에서 확정한다.
+  - EXP-61 AK가 스프린트 중에 세 줄 늘었다(28.09. 전체 목록 기준 정렬, 정렬하면 1페이지로 이동 / 30.09. 페이지를 넘겨도 정렬 유지). 모두 Joon이 질문해서 Lena가 확인했다. 1 SP를 넘을 수 있으니 EXP-66 착수가 01.10. 이후로 밀리면 EXP-58 범위를 다시 본다.
 
 ## Sprint 1–7 요약
 - 기반 구축(1–2), 목록·API(3), 등록 폼·환율(4), 수정·제출·상세(5), 승인 API·역할(6), zoneless·업그레이드·온보딩 문서(7).
