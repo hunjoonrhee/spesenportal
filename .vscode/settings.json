@@ -1,0 +1,73 @@
+{
+  // ── 폰트 ──
+  "editor.fontFamily": "'VictorMono Nerd Font', Menlo, monospace",
+  "editor.fontSize": 14,
+  "editor.lineHeight": 1.7,
+  "editor.fontLigatures": true,
+  "terminal.integrated.fontFamily": "'VictorMono Nerd Font'",
+  "terminal.integrated.fontSize": 13,
+
+  // ── UI 덜어내기 ──
+  "workbench.activityBar.location": "top",
+  "workbench.layoutControl.enabled": false,
+  "workbench.startupEditor": "none",
+  "workbench.tree.indent": 14,
+  "workbench.tree.renderIndentGuides": "onHover",
+  "editor.minimap.enabled": false,
+  "editor.renderLineHighlight": "gutter",
+  "editor.scrollbar.verticalScrollbarSize": 6,
+  "editor.scrollbar.horizontalScrollbarSize": 6,
+  "editor.overviewRulerBorder": false,
+  "editor.hideCursorInOverviewRuler": true,
+  "editor.padding.top": 12,
+
+  // ── 부드러운 움직임 ──
+  "editor.cursorBlinking": "phase",
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.smoothScrolling": true,
+  "workbench.list.smoothScrolling": true,
+
+  // ── 코드 가독성 ──
+  "editor.stickyScroll.enabled": true,
+  "editor.guides.bracketPairs": "active",
+  "editor.inlayHints.enabled": "offUnlessPressed",
+  "editor.linkedEditing": true,
+
+  // ── 저장 시 자동 정리 ──
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always",
+    "source.organizeImports": "always"
+  },
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+
+  // ── 파일 네스팅 (Angular) ──
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.expand": false,
+  "explorer.fileNesting.patterns": {
+    "*.ts": "${capture}.html, ${capture}.scss, ${capture}.css, ${capture}.spec.ts",
+    "package.json": "package-lock.json, .npmrc, .nvmrc, .prettierrc*, .editorconfig",
+    "angular.json": "tsconfig*.json"
+  },
+  "explorer.compactFolders": false,
+  "explorer.confirmDragAndDrop": false,
+
+  // 포커스 아웃 시 자동 저장
+  "files.autoSave": "onFocusChange",
+
+  // 파일 타입별 Prettier 지정 (다른 확장이 포맷터를 가로채는 것 방지)
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
