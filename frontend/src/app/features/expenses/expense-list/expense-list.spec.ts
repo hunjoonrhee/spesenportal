@@ -160,7 +160,7 @@ describe('ExpenseList', () => {
     component.pageSize = mockPageSize;
     component.page = 2;
     component.sortByDate();
-    expect(expenseServiceMock.list).toHaveBeenCalledWith({
+    expect(expenseServiceMock.list).toHaveBeenLastCalledWith({
       page: 1,
       pageSize: component.pageSize,
       sort: 'date',
@@ -171,12 +171,21 @@ describe('ExpenseList', () => {
   it('behalte die geänderte Reihenfolge bei, auch wenn die Seite geändert wird', () => {
     component.sortAsc = true;
     component.pageSize = mockPageSize;
-    component.goTo(2);
-    expect(expenseServiceMock.list).toHaveBeenCalledWith({
-      page: 2,
-      pageSize: component.pageSize,
+    const dateSortButton = fixture.nativeElement.querySelector('[data-testid="date-sort"]');
+    expect(dateSortButton).toBeTruthy();
+    dateSortButton.click();
+    expect(expenseServiceMock.list).toHaveBeenLastCalledWith({
+      page: 1,
+      pageSize: mockPageSize,
       sort: 'date',
-      order: 'asc',
+      order: 'desc',
+    });
+    component.goTo(2);
+    expect(expenseServiceMock.list).toHaveBeenLastCalledWith({
+      page: 2,
+      pageSize: mockPageSize,
+      sort: 'date',
+      order: 'desc',
     });
   });
 

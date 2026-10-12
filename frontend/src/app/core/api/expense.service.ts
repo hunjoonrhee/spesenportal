@@ -1,9 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Expense, Page } from '../models';
-import { SortField } from '../models/sortField';
-import { SortOrder } from '../models/sortOrder';
+import { Expense, Page, SortField, SortOrder } from '../models';
 
 @Injectable({ providedIn: 'root' })
 export class ExpenseService {
