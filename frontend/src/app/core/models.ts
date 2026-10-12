@@ -54,3 +54,6 @@ export const ROLE_LABELS: Record<Role, string> = {
   APPROVER: 'Kostenstellenverantwortliche:r',
   ACCOUNTING: 'Buchhaltung',
 };
+
+export type SortField = 'date' | 'amount';
+export type SortOrder = 'asc' | 'desc';

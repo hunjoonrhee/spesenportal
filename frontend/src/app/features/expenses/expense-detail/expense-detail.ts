@@ -1,6 +1,5 @@
 import { Component, computed, inject, input } from '@angular/core';
-import { rxResource } from '@angular/core/rxjs-interop';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { rxResource, toSignal } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 import { ExpenseService } from '../../../core/api/expense.service';
 import { MasterDataService } from '../../../core/api/master-data.service';
@@ -26,8 +25,12 @@ export class ExpenseDetail {
     stream: ({ params: id }) => this.expenseService.get(id),
   });
 
-  private readonly categories = toSignal(this.masterData.categories(), { initialValue: [] as Category[] });
-  private readonly costCenters = toSignal(this.masterData.costCenters(), { initialValue: [] as CostCenter[] });
+  private readonly categories = toSignal(this.masterData.categories(), {
+    initialValue: [] as Category[],
+  });
+  private readonly costCenters = toSignal(this.masterData.costCenters(), {
+    initialValue: [] as CostCenter[],
+  });
 
   protected readonly categoryLabel = computed(() => {
     const e = this.expense.value();

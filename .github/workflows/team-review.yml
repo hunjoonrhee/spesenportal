@@ -1,14 +1,19 @@
 # Joon의 PR을 자동 리뷰한다: frontend/ 변경 → Sabine, backend/ 변경 → Markus.
 # BE 팀 PR(제목이 "[BE]"로 시작)은 자동 리뷰하지 않는다. Joon이 교차 리뷰한다.
+# 리뷰 시점: PR을 열 때, Draft에서 Ready로 바꿀 때, 그리고 `re-review` 라벨을 붙일 때.
+# push마다 다시 리뷰하지 않는다. 다시 리뷰받으려면 라벨을 붙이면 되고, 리뷰가 끝나면 라벨은 자동으로 떨어진다.
 name: Team Review
 
 on:
   pull_request:
-    types: [opened, synchronize, ready_for_review]
+    types: [opened, ready_for_review, labeled]
 
 jobs:
   changes:
-    if: github.event.pull_request.draft == false && !startsWith(github.event.pull_request.title, '[BE]')
+    if: >-
+      github.event.pull_request.draft == false &&
+      !startsWith(github.event.pull_request.title, '[BE]') &&
+      (github.event.action != 'labeled' || github.event.label.name == 're-review')
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -31,6 +36,10 @@ jobs:
     needs: changes
     if: needs.changes.outputs.frontend == 'true'
     runs-on: ubuntu-latest
+    # 같은 PR에서 리뷰가 겹치면 앞의 것을 취소하고 마지막 것만 남긴다 (리뷰 job에만 건다).
+    concurrency:
+      group: team-review-sabine-${{ github.event.pull_request.number }}
+      cancel-in-progress: true
     permissions:
       contents: read
       pull-requests: write
@@ -55,10 +64,14 @@ jobs:
             - 구체적인 줄에는 인라인 코멘트를 남긴다 (mcp__github_inline_comment__create_inline_comment).
             - 마지막에 요약 코멘트 하나를 gh pr comment로 남긴다: 꼭 고칠 것 / 고려해볼 것 / 잘한 것.
             - 코멘트는 한국어, 문제 → 이유 → 대안 순서. 정답 코드를 통째로 주지 않는다 (5줄 이내 예시만).
+            - 리뷰를 시작하기 전에 이 PR의 이전 리뷰를 읽는다: `gh pr view ${{ github.event.pull_request.number }} --comments`로 요약 코멘트와 답글을, `gh api repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/comments`로 인라인 코멘트와 작성자 답글을 확인한다.
+            - 작성자가 답글로 고쳤다고 했거나 리졸브한 지적은 다시 쓰지 않는다. 실제로 고쳐지지 않았을 때만 그 스레드를 짚는다.
+            - 이전 라운드와 판단을 바꿀 때(예: 꼭 고칠 것 → 고려해볼 것)는 요약 코멘트에 무엇을 왜 바꿨는지 밝힌다.
+            - 요약 코멘트 맨 위에 "이전 라운드 대비: 해결 N / 남음 M / 새로 발견 K"를 쓴다. 첫 리뷰라면 생략한다.
           claude_args: |
             --model opus
-            --max-turns 20
-            --allowedTools "mcp__github_inline_comment__create_inline_comment,Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*),Read,Grep,Glob"
+            --max-turns 35
+            --allowedTools "mcp__github_inline_comment__create_inline_comment,Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*),Bash(gh api repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/comments:*),Read,Grep,Glob"
       - name: Slack-Hinweis
         if: env.SLACK_BOT_TOKEN != '' && env.SLACK_CHANNEL_PR_REVIEW != ''
         env:
@@ -73,6 +86,10 @@ jobs:
     needs: changes
     if: needs.changes.outputs.backend == 'true'
     runs-on: ubuntu-latest
+    # 같은 PR에서 리뷰가 겹치면 앞의 것을 취소하고 마지막 것만 남긴다 (리뷰 job에만 건다).
+    concurrency:
+      group: team-review-markus-${{ github.event.pull_request.number }}
+      cancel-in-progress: true
     permissions:
       contents: read
       pull-requests: write
@@ -97,10 +114,14 @@ jobs:
             - 구체적인 줄에는 인라인 코멘트를 남긴다 (mcp__github_inline_comment__create_inline_comment).
             - 마지막에 요약 코멘트 하나를 gh pr comment로 남긴다: 꼭 고칠 것 / 고려해볼 것 / 잘한 것.
             - 코멘트는 한국어, 문제 → 이유 → 대안 순서. 정답 코드를 통째로 주지 않는다 (5줄 이내 예시만).
+            - 리뷰를 시작하기 전에 이 PR의 이전 리뷰를 읽는다: `gh pr view ${{ github.event.pull_request.number }} --comments`로 요약 코멘트와 답글을, `gh api repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/comments`로 인라인 코멘트와 작성자 답글을 확인한다.
+            - 작성자가 답글로 고쳤다고 했거나 리졸브한 지적은 다시 쓰지 않는다. 실제로 고쳐지지 않았을 때만 그 스레드를 짚는다.
+            - 이전 라운드와 판단을 바꿀 때(예: 꼭 고칠 것 → 고려해볼 것)는 요약 코멘트에 무엇을 왜 바꿨는지 밝힌다.
+            - 요약 코멘트 맨 위에 "이전 라운드 대비: 해결 N / 남음 M / 새로 발견 K"를 쓴다. 첫 리뷰라면 생략한다.
           claude_args: |
             --model opus
-            --max-turns 20
-            --allowedTools "mcp__github_inline_comment__create_inline_comment,Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*),Read,Grep,Glob"
+            --max-turns 35
+            --allowedTools "mcp__github_inline_comment__create_inline_comment,Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*),Bash(gh api repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/comments:*),Read,Grep,Glob"
       - name: Slack-Hinweis
         if: env.SLACK_BOT_TOKEN != '' && env.SLACK_CHANNEL_PR_REVIEW != ''
         env:
@@ -110,3 +131,17 @@ jobs:
         run: >
           node scripts/slack-post.mjs --as markus --channel "$SLACK_CHANNEL_PR_REVIEW"
           --text "PR #$PR_NUMBER ($PR_TITLE) BE 쪽 리뷰 남겼어. $PR_URL"
+
+  # `re-review` 라벨로 다시 리뷰한 뒤 라벨을 떼어 둔다. 다음에 다시 붙이면 또 리뷰가 돈다.
+  remove-label:
+    needs: [sabine, markus]
+    if: always() && github.event.action == 'labeled' && github.event.label.name == 're-review'
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: gh pr edit "$PR_NUMBER" --remove-label re-review

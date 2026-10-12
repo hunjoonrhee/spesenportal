@@ -37,23 +37,32 @@ export class ExpenseList implements OnInit {
   }
 
   load(): void {
-    this.expenseService.list({ page: this.page, pageSize: this.pageSize }).subscribe((result) => {
-      const rows = result.items.map((e) => ({
-        ...e,
-        formattedDate: new Date(e.date).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' }),
-        categoryLabel: this.categories.find((c) => c.id === e.categoryId)?.label ?? '–',
-      }));
-      this.rows$.next(rows);
-      this.total$.next(result.total);
-    });
+    this.expenseService
+      .list({
+        page: this.page,
+        pageSize: this.pageSize,
+        sort: 'date',
+        order: this.sortAsc ? 'asc' : 'desc',
+      })
+      .subscribe((result) => {
+        const rows = result.items.map((e) => ({
+          ...e,
+          formattedDate: new Date(e.date).toLocaleDateString('de-DE', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+          }),
+          categoryLabel: this.categories.find((c) => c.id === e.categoryId)?.label ?? '–',
+        }));
+        this.rows$.next(rows);
+        this.total$.next(result.total);
+      });
   }
 
   sortByDate(): void {
     this.sortAsc = !this.sortAsc;
-    const sorted = [...this.rows$.value].sort((a, b) =>
-      this.sortAsc ? a.formattedDate.localeCompare(b.formattedDate) : b.formattedDate.localeCompare(a.formattedDate),
-    );
-    this.rows$.next(sorted);
+    this.page = 1;
+    this.load();
   }
 
   formatAmount(amount: number, currency: string): string {
