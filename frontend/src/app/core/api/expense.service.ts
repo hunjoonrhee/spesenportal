@@ -2,13 +2,15 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Expense, Page } from '../models';
+import { SortField } from '../models/sortField';
+import { SortOrder } from '../models/sortOrder';
 
 @Injectable({ providedIn: 'root' })
 export class ExpenseService {
   private readonly http = inject(HttpClient);
 
   list(
-    params: { page?: number; pageSize?: number; sort?: string; order?: string } = {},
+    params: { page?: number; pageSize?: number; sort?: SortField; order?: SortOrder } = {},
   ): Observable<Page<Expense>> {
     let httpParams = new HttpParams();
     Object.entries(params).forEach(([key, value]) => {
