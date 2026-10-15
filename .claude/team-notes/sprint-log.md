@@ -2,6 +2,23 @@
 
 Thomas가 회의마다 갱신한다. 최신이 위.
 
+## 리파인먼트 (수 14.10.2026)
+- 참석: Joon, Lena, Sabine, Jonas, Katrin. 안건은 Lena가 12:12에 #sprint에 올렸다(루틴을 고친 뒤 처음 정상 실행).
+- **EXP-74** (FE, `refined`, **5 SP**, 백로그 최상단): 필터, 정렬, 페이지를 URL에 담는다.
+  - 결정 ①: 상태의 원본은 **URL**(A). Joon의 근거: 한 방향 흐름, signal 동기화 걱정이 없다.
+  - 결정 ②: URL 규칙(키, 파싱, 검증, 기본값)은 **서비스 한 곳(어댑터)**만 안다. 컴포넌트는 signal만 읽는다. 특정 화면 전용이 아니다.
+  - 값은 API 어휘(`sort=date&order=asc`, `status=SUBMITTED`)를 쓰고, 기본값은 생략한다.
+  - 기록: 필터·정렬 변경은 교체(`replaceUrl`), 페이지 이동은 쌓기(Lena 결정).
+  - AC 4: 잘못되었거나 오래된 URL 값은 무시하거나 기본값으로 바꾸고, 목록은 그대로 보여준다(Joon이 위험을 찾음).
+  - SP 근거: router와 zoneless signal이 처음이라 불확실하다. Jonas는 3을, Sabine은 5를 냈다. "테스트"는 SP의 근거가 아니다(DoD).
+  - ADR-0006 초안: Thomas가 뼈대를 만들고 Joon이 결과와 트레이드오프를 채운다.
+- **EXP-58**: AK „Filter bleibt nach einem Reload erhalten“을 EXP-74로 옮겼다(Joon 제안, Lena 동의, 조건: EXP-74를 Sprint 9 최상단에). SP 3은 그대로.
+- **EXP-54** (Fullstack, `refined`, **3 SP**): 목록 위 „Kategorie ▾“와 체크박스 팝오버, 선택 칩과 „+N“, 전부 선택은 필터 없음, 카테고리 `key` 사용. 구현 전에 Joon이 와이어프레임을 붙이고 Lena와 Sabine이 확인한다. 순서 58 → 74 → 54. Sabine은 5, Katrin은 3을 냈고, Joon이 EXP-58 기준으로 3을 골랐다.
+- 넘김: **EXP-53**(검색)은 다음 리파인먼트, **EXP-60** AK 추가안은 PR #8 리뷰 때 확인.
+- 열린 질문: 검색어를 URL에 넣어도 되는지(DSGVO, Lena), „0개 선택“의 뜻(Lena), 모르는 카테고리 key에 대한 API 응답(400 vs 무시, Markus), 다중 값 표기(EXP-58 구현 때).
+- 회고 안건(Joon): 2주 스프린트가 짧다(PR 하나에 오래 걸리고, BE 리뷰에 공부가 필요하다). 그 밖에 EXP-61 SP, `.vscode/settings.json`.
+- 배운 점: 기준점이 되는 SP(EXP-58의 3)가 Joon이 합류하기 전에 매긴 값이었다. 기준점으로 쓰기 전에 그 숫자에 동의하는지부터 확인한다.
+
 ## 킥오프 완료 (2026-09-25)
 - Jira EXP: 이슈 80건 CSV 가져오기 확인 (Done 45 / To Do 35). EXP-58·60·61·66 표본 대조 일치.
 - CSV 가져오기 때 다중 라벨이 `_`로 합쳐진 15건(EXP-55~67, 71, 78)을 분리 수정. `labels = sprint-8` → 6건 확인.
