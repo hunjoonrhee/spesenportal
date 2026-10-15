@@ -2,6 +2,7 @@ import { BadRequestException, ForbiddenException, Injectable, NotFoundException 
 import { DataStoreService } from '../data/data-store.service.js';
 import { EUR_RATES, type Expense, type Page, type User } from '../domain/types.js';
 import type { CreateExpenseDto } from './dto/create-expense.dto.js';
+import type { UpdateExpenseDto } from './dto/update-expense.dto.js';
 import type { ListExpensesQuery } from './dto/list-expenses.query.js';
 
 @Injectable()
@@ -64,12 +65,19 @@ export class ExpensesService {
     return expense;
   }
 
-  // TODO(markus): DTO + Validierung nachziehen, war für Sprint 5 zu knapp
-  update(user: User, id: string, changes: any): Expense {
+  update(user: User, id: string, dto: UpdateExpenseDto): Expense {
     const expense = this.findOne(user, id);
     if (expense.status !== 'DRAFT') throw new BadRequestException('Nur Entwürfe können bearbeitet werden');
+    if (dto.categoryId !== undefined && !this.store.categories.some((c) => c.id === dto.categoryId)) {
+      throw new BadRequestException(`Unbekannte Kategorie ${dto.categoryId}`);
+    }
+    if (dto.costCenterId !== undefined && !this.store.costCenters.some((c) => c.id === dto.costCenterId)) {
+      throw new BadRequestException(`Unbekannte Kostenstelle ${dto.costCenterId}`);
+    }
+    // null (von @IsOptional durchgelassen) und undefined überschreiben nichts
+    const changes = Object.fromEntries(Object.entries(dto).filter(([, v]) => v !== undefined && v !== null));
     Object.assign(expense, changes);
-    if (changes.amount || changes.currency) {
+    if (dto.amount !== undefined || dto.currency !== undefined) {
       expense.amountEur = Math.round(expense.amount * EUR_RATES[expense.currency] * 100) / 100;
     }
     return expense;
