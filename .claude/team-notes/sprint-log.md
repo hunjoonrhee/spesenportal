@@ -25,7 +25,9 @@ Thomas가 회의마다 갱신한다. 최신이 위.
 - Confluence 스페이스 SP(Spesenportal)에 Onboarding, Architektur, Team & Arbeitsweise, Konventionen, Architecture Decision Records(ADR-0001~0005) 게시. 원본은 레포 `docs/`.
 - Jira 보드 `EXP board`(id 2)에는 자동 생성된 빈 스프린트 `EXP Sprint 1`만 있음 → Joon이 Sprint 8로 정리. 이슈 담기는 플래닝에서.
 
-## Sprint 8 (28.09.–18.10.2026, 1주 연장) – Joon 합류
+## Sprint 8 (28.09.–01.11.2026, 두 번 연장) – Joon 합류
+- 두 번째 연장 (16.10.): Joon이 시험 준비 등으로 일정을 다시 조정해 달라고 요청했다. 종료일을 18.10.에서 **01.11.(일)**로 옮겼다(Jira 반영). 리뷰·회고는 토 31.10. 22:15, Sprint 9 플래닝은 월 02.11. 21:00. 다음 리파인먼트는 수 28.10. 21:00(EXP-53 등).
+- 앞으로 스프린트는 **4주**다. Lena는 Sprint 8 목표를 유지한다(01.11.까지 EXP-66과 EXP-58이 들어오면). 두 티켓은 묶지 말고 하나씩 끝까지 머지한다.
 - 상태: **진행 중** (플래닝 월 28.09., Jira 스프린트 시작함)
 - 연장: 원래 종료일은 11.10.이었다. Joon이 출장(05.10. 주)으로 작업하지 못해 07.10.에 #daily에서 "종료를 일주일 미루자"고 제안했고, 10.10.에 종료일을 18.10.로 확정했다. Jira 종료일은 12.10.에 18.10. 23:59로 반영했다. 리뷰·회고는 토 17.10., Sprint 9 플래닝은 월 19.10.로 옮긴다.
 - 목표: „Joon ist im Team angekommen, und ‚Meine Ausgaben' zeigt korrekte und filterbare Daten."
