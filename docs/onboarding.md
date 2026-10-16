@@ -20,7 +20,7 @@ Du bist Fullstack-Entwickler mit Schwerpunkt Frontend (etwa 70 % Frontend, 30 % 
 7. Dein erstes Ticket ist ein kleiner Bug (EXP-61). Ideal, um den Ablauf von Branch bis Merge einmal durchzugehen.
 
 ## Arbeitsweise
-- Sprints von zwei Wochen, Montag bis Sonntag
+- Sprints von vier Wochen, Montag bis Sonntag (seit Sprint 9; Refinement alle zwei Wochen)
 - Planning, Refinement, Review und Retro: siehe `docs/team.md`
 - Kommunikation im Slack: #daily, #sprint, #backend, #pr-review
 
